@@ -1,0 +1,26 @@
+Package: gwas3
+Type: Package
+Title: Three Phase Filtering for GWAS
+Version: 0.1.0
+Author: Jill F Lundell
+Maintainer: Jill F Lundell <jflundell@gmail.com>
+Description: Gwas3 contains function that can be used to implement 
+    a three phase variable selection method to perform 
+    GWAS. The function are generic enough to be used outside of 
+    genetics and can be used for multi-stage variable selection. 
+Depends: R (>= 3.1.0)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports:
+    energy, 
+    lmtest, 
+    glmnet, 
+    randomForest, 
+    ggplot2, 
+    rpart, 
+    rpart.plot, 
+    graphics
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat
