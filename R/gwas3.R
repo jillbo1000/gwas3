@@ -3,16 +3,30 @@
 #' The gwas3 package contains functions that can be used for a
 #' three-stage filtering GWAS method. It can also be expanded
 #' to variable selection for other types of datasets.
-#' The gwas3 package provides three categories of important functions:
-#' simple initial filters, elastic net for second stage filtering, and
+#' The gwas3 package provides four categories of important functions:
+#' gwas data simulator, simple initial filters, elastic net for
+#' second stage filtering, and
 #' random forests and trees for final SNP selection.
 #'
 #' @section Gwas3 functions:
-#' The gwas3 functions are \code{snp_filter}, \code{filter_subset},
+#' The gwas3 functions are \code{gwas_sim}, \code{snp_filter},
+#' \code{filter_subset},
 #' \code{elasticnet}, \code{snp_rf}, \code{snp_tree}, and \code{tree_plot}.
 #' The functions are intended to be used
 #' successively to perform a comprehensive GWAS, but they can be used
 #' as stand alone functions for variable selection.
+#'
+#' @section GWAS data simulator:
+#' \code{gwas_sim} uses a set of real genotypes to generate simulated
+#' GWAS data. The user specifies the number of SNPs that will influence
+#' the phenotype and the heretability (R-square) and the simulator
+#' returns a phenotype that is dependent only on those SNPs. The
+#' simulator randomly selects the SNPs that will contribute to the
+#' phenotype. The function returns the phenotype, SNP locations,
+#' effect size, and the estimated heretability between the genotype
+#' and simulated SNP. Note that the genotype is not changed so all of
+#' the physical characteristics, such as linkage disequilbrium, are
+#' preserved.
 #'
 #' @section Primary filter functions:
 #' \code{snp_filter} uses distance correlation, logistic regression,
