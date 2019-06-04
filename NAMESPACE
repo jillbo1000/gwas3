@@ -2,6 +2,7 @@
 
 export(elasticnet)
 export(filter_subset)
+export(gwas_sim)
 export(snp_filter)
 export(snp_rf)
 export(snp_tree)
