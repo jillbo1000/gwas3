@@ -34,7 +34,7 @@ snp_filter <- function(x, y, type = "dc", window = 1, fdr = TRUE) {
   if(window > ncol(x)) stop("Invalid value of window. Use a positive integer
                             less than the number of SNPs in x.")
 
-  results <- rep(0, ncol(x))
+  results <- rep(NA, ncol(x))
   window <- round(window / 2)
 
   if(type == "dc") {
@@ -70,7 +70,7 @@ snp_filter <- function(x, y, type = "dc", window = 1, fdr = TRUE) {
         tmp <- x[, rng]
         fit <- stats::glm(y ~ as.matrix(tmp), family = "gaussian")
         if(window < 1) {
-          results[i] <- stats::coef(summary(fit))[2,4]
+          try(results[i] <- stats::coef(summary(fit))[2,4])
         } else {
           results[i] <- lmtest::lrtest(fit)$Pr[2]
         }
