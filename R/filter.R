@@ -43,7 +43,7 @@ snp_filter <- function(x, y, type = "dc", window = 1, fdr = TRUE) {
       rng <- rng[rng > 0]
       rng <- rng[rng <= ncol(x)]
       tmp <- x[, rng]
-      results[i] <- energy::dcor(tmp, y)
+      try(results[i] <- energy::dcor(tmp, y))
     }
   } else {
 
@@ -56,9 +56,9 @@ snp_filter <- function(x, y, type = "dc", window = 1, fdr = TRUE) {
         tmp <- x[, rng]
         fit <- stats::glm(y ~ as.matrix(tmp), family = "binomial")
         if(window < 1) {
-          results[i] <- stats::coef(summary(fit))[2,4]
+          try(results[i] <- stats::coef(summary(fit))[2,4])
         } else {
-          results[i] <- lmtest::lrtest(fit)$Pr[2]
+          try(results[i] <- lmtest::lrtest(fit)$Pr[2])
         }
       }
     } else {
@@ -72,7 +72,7 @@ snp_filter <- function(x, y, type = "dc", window = 1, fdr = TRUE) {
         if(window < 1) {
           try(results[i] <- stats::coef(summary(fit))[2,4])
         } else {
-          results[i] <- lmtest::lrtest(fit)$Pr[2]
+          try(results[i] <- lmtest::lrtest(fit)$Pr[2])
         }
       }
     }
