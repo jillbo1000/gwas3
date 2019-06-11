@@ -16,11 +16,13 @@
 #' @param type The type of measure in the results vector. The
 #' default is "dc" for distance correlations. If a different
 #' string is used it is assumed that the vector contains p-values.#'
-#' @param threshold This value determines which SNPs are retained.
-#' If the results are p-values, all SNPs with a p-value less than
+#' @param threshold This value can either be decimal less than 1 or
+#' a positive integer. If a number less than 1 and if
+#' the results are p-values, all SNPs with a p-value less than
 #' the threshold will be retained. If the results are distance
 #' correlations, all SNPs with a value greater than the threshold
-#' will be retained.
+#' will be retained. A positive integer indicates how many SNP
+#' should pass through the filter.
 #' @param window This is the size of the window used in the initial filter.
 #' If a window was used in the \code{snp_filter} function. The dataset that
 #' is returned will contain the selected SNP and the SNPs in the
@@ -41,6 +43,14 @@ filter_subset <- function(x, results, type = "dc", threshold, window = 1) {
   if(window < 1) stop("Invalid value of window. Use a positive integer")
   if(window > ncol(x)) stop("Invalid value of window. Use a positive integer
                             less than the number of SNPs in x.")
+
+  if(threshold > 1) {
+    if(type == "dc") {
+      threshold <- results[order(results, decreasing = TRUE)][threshold]
+    } else {
+      threshold <- results[order(results)][threshold]
+    }
+  }
 
   if(type == "dc") {
     results <- -1 * results

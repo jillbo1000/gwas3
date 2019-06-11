@@ -20,11 +20,13 @@ in \code{x}.}
 default is "dc" for distance correlations. If a different
 string is used it is assumed that the vector contains p-values.#'}
 
-\item{threshold}{This value determines which SNPs are retained.
-If the results are p-values, all SNPs with a p-value less than
+\item{threshold}{This value can either be decimal less than 1 or
+a positive integer. If a number less than 1 and if
+the results are p-values, all SNPs with a p-value less than
 the threshold will be retained. If the results are distance
 correlations, all SNPs with a value greater than the threshold
-will be retained.}
+will be retained. A positive integer indicates how many SNP
+should pass through the filter.}
 
 \item{window}{This is the size of the window used in the initial filter.
 If a window was used in the \code{snp_filter} function. The dataset that
