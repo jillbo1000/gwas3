@@ -38,7 +38,7 @@
 
 filter_subset <- function(x, results, type = "dc", threshold, window = 1) {
 
-  if(ncol(x) != length(threshold)) stop("Number of results is not equal
+  if(ncol(x) != length(results)) stop("Number of results is not equal
                                         to the number of variables in x.")
   if(window < 1) stop("Invalid value of window. Use a positive integer")
   if(window > ncol(x)) stop("Invalid value of window. Use a positive integer
@@ -59,14 +59,14 @@ filter_subset <- function(x, results, type = "dc", threshold, window = 1) {
 
   if(window == 1) {
 
-    dat <- x[, results < threshold]
+    dat <- x[, results <= threshold]
 
   } else {
 
     window <- round(window / 2)
     keep <- NULL
     keep2 <- 1:ncol(x)
-    keep2 <- keep2[results < threshold]
+    keep2 <- keep2[results <= threshold]
 
     for(i in 1:length(keep2)) {
       rng <- (keep2[i] - window):(keep2[i] + window)

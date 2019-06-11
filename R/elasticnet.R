@@ -46,7 +46,7 @@ elasticnet <- function(x, y) {
     test2 <- glmnet::glmnet(as.matrix(x), y, family = fam,
                             lambda = test$lambda.1se, alpha = alpha[i])
     b <- stats::coef(test2)[-1]
-    x_en <- x[, b > 0]
+    x_en <- x[, abs(b) > 0]
     dat[[i]]$data <- x_en
     dat[[i]]$alpha <- alpha[i]
 
