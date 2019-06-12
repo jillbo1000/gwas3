@@ -57,6 +57,8 @@ filter_subset <- function(x, results, type = "dc", threshold, window = 1) {
     threshold <- -1 * threshold
   }
 
+  results[is.na(results)] <- 1
+
   if(window == 1) {
 
     dat <- x[, results <= threshold]
